@@ -1,0 +1,8 @@
+{
+  "restartable": "rs",
+  "ignore": [".git", "src/**/*.spec.ts"],
+  "verbose": false,
+  "watch": ["src"],
+  "ext": "ts",
+  "exec": "node -r ts-node/register/transpile-only --inspect=0.0.0.0:9222 src/server.ts"
+}

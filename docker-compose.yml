@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  #MongoDB services
+  mongo_db:
+    container_name: db_container
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_db:/data/db
+  #Node API services
+
+  api:
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      PORT: 3000
+      MONGODB_URI: mongodb://mongo_db:27017/suggestions
+      DB_NAME: suggestions
+    volumes:
+      - type: bind
+        source: ../sunsniffer/
+        target: /usr/src/app
+    command: npm run dev
+    depends_on:
+      - mongo_db
+
+volumes:
+  mongo_db: {}

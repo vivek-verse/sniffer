@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "outDir": "build",
+    "rootDirs": ["./src"],
+    "sourceMap": true,
+    "target": "es6",
+    "resolveJsonModule": true,
+    "lib": ["es5", "es6", "es2019", "dom"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"],
+  "types": ["node", "jest"],
+  "lib": ["es5", "es6", "es2019", "dom", "esnext"]
+}
