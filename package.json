@@ -2,10 +2,10 @@
   "name": "suggestions",
   "version": "0.0.1",
   "description": "suggestions",
-   "scripts": {
+  "scripts": {
     "build": "npx tsc",
     "start": "npx tsc && node ./build/index.js",
-    "dev" : "nodemon --legacy-watch",
+    "dev": "nodemon --legacy-watch",
     "lint": "npx eslint . --ext .ts",
     "lint-and-fix": "npx eslint . --ext .ts --fix"
   },
@@ -26,6 +26,7 @@
     "commander": "^9.3.0",
     "cors": "^2.8.5",
     "express": "^4.17.3",
+    "express-rate-limit": "^6.4.0",
     "husky": "^4.3.8",
     "mongoose": "^6.2.8",
     "reflect-metadata": "^0.1.13"

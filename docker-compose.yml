@@ -11,15 +11,12 @@ services:
     volumes:
       - mongo_db:/data/db
   #Node API services
-
   api:
     build: .
     ports:
       - 3000:3000
-    environment:
-      PORT: 3000
-      MONGODB_URI: mongodb://mongo_db:27017/suggestions
-      DB_NAME: suggestions
+    env_file:
+      - ./.env
     volumes:
       - type: bind
         source: ../sunsniffer/

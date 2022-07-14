@@ -6,7 +6,7 @@ class SuggestionsModel {
   async getSuggestions(req: Request) {
     const pipelineArray: PipelineStage[] = [];
 
-    const { q, radius = 10, sort: sortBy = "name" } = req.query;
+    const { q, radius = parseFloat(process.env.DEFAULT_SEARCH_RADIUS), sort: sortBy = "name" } = req.query;
 
     const latitude = req.query.latitude ? parseFloat(req.query.latitude as string) : null;
     const longitude = req.query.longitude ? parseFloat(req.query.longitude as string) : null;
