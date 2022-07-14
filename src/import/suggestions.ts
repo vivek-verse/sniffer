@@ -40,6 +40,8 @@ export const run = async () => {
   }
 
   console.log("All done!");
+
+  process.exit(1);
 };
 
 program
