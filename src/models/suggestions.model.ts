@@ -1,8 +1,73 @@
+import { Request } from "express";
+import { PipelineStage } from "mongoose";
 import { Suggestions } from "../schemas";
 
 class SuggestionsModel {
-  async getSuggestions() {
-    console.log("Bla bla!");
+  async getSuggestions(req: Request) {
+    const pipelineArray: PipelineStage[] = [];
+
+    const { q, radius = 10, sort: sortBy = "name" } = req.query;
+
+    const latitude = req.query.latitude ? parseFloat(req.query.latitude as string) : null;
+    const longitude = req.query.longitude ? parseFloat(req.query.longitude as string) : null;
+
+    if (
+      latitude &&
+      longitude &&
+      typeof latitude === "number" &&
+      typeof longitude === "number" &&
+      latitude >= -90 &&
+      latitude <= 90 &&
+      longitude >= -180 &&
+      longitude <= 180
+    ) {
+      const latLongMatchPipeline: PipelineStage = {
+        $geoNear: {
+          near: {
+            type: "Point",
+            coordinates: [longitude, latitude],
+          },
+          maxDistance: 1000 * (radius as number),
+          spherical: true,
+          distanceField: "distance",
+          distanceMultiplier: 0.001,
+        },
+      };
+
+      pipelineArray.push(latLongMatchPipeline);
+    }
+
+    if (q && typeof q === "string") {
+      const textMatchPipeline: PipelineStage = {
+        $match: {
+          name: {
+            $regex: q,
+            $options: "i",
+          },
+        },
+      };
+
+      pipelineArray.push(textMatchPipeline);
+    }
+
+    const sortPipeline: PipelineStage = {
+      $sort: { [sortBy as string]: 1, distance: 1 },
+    };
+
+    const projectPipeline = {
+      $project: {
+        name: 1,
+        longitude: { $arrayElemAt: ["$location.coordinates", 0] },
+        latitude: { $arrayElemAt: ["$location.coordinates", 1] },
+        distance: 1,
+        _id: 0,
+      },
+    };
+
+    pipelineArray.push(sortPipeline);
+    pipelineArray.push(projectPipeline);
+
+    return await Suggestions.aggregate(pipelineArray);
   }
 }
 

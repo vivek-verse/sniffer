@@ -13,6 +13,7 @@ const SuggestionsSchema = new Schema({
 });
 
 SuggestionsSchema.index({ location: "2dsphere" });
+SuggestionsSchema.index({ name: "text" });
 
 SuggestionsSchema.pre("save", function (next) {
   const currentDate = new Date();
