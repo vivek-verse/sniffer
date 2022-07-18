@@ -1,4 +1,4 @@
-# Sugggestions
+# Suggestions
 
 ## To run in Docker
 

@@ -20,7 +20,7 @@ services:
       - ./.env
     volumes:
       - type: bind
-        source: ../sunsniffer/
+        source: ../sniffer/
         target: /usr/src/app
     command: npm run dev
     depends_on:
