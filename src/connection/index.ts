@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
-
 const { connect, connection } = mongoose;
-
+import "dotenv/config";
 mongoose.set("autoIndex", true);
 mongoose.set("debug", false);
 
-const mongoConectionString =
-  process.env.ENVIRON === "test" ? "mongodb://localhost:27017/suggestions" : process.env.MONGODB_URI;
+const mongoConectionString = process.env.MONGODB_URI;
 
 connect(mongoConectionString, (err) => {
   if (err) {

@@ -4,7 +4,7 @@ import express from "express";
 
 import router from "./controllers";
 
-async function bootstrap() {
+function bootstrap() {
   const application = express();
   if (process.env.NODE_ENV === "local" || process.env.NODE_ENV === "dev") {
     const corsOptions = {

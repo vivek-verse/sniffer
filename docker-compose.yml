@@ -12,6 +12,7 @@ services:
       - mongo_db:/data/db
   #Node API services
   api:
+    container_name: api_container
     build: .
     ports:
       - 3000:3000

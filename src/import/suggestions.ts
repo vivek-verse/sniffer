@@ -3,14 +3,14 @@ import commander from "commander";
 import { tsvToJSON } from "../libs/utils";
 import mongoose from "mongoose";
 import { Suggestions } from "../schemas";
-
+import "dotenv/config";
 const fileData = async () => {
   return await promises.readFile("files/cities_canada-usa.tsv");
 };
 
 const program = new commander.Command();
 
-const mongoConnectionString = "mongodb://localhost:27017/suggestions";
+const mongoConnectionString = process.env.MONGODB_URI;
 
 export const run = async () => {
   try {
@@ -36,7 +36,8 @@ export const run = async () => {
       };
     });
 
-    await Suggestions.insertMany(toInsert);
+    const inserted = await Suggestions.insertMany(toInsert);
+    console.log("Inserted : ", inserted);
   }
 
   console.log("All done!");
