@@ -7,7 +7,8 @@
     "start": "npx tsc && node ./build/index.js",
     "dev": "nodemon --legacy-watch",
     "lint": "npx eslint . --ext .ts",
-    "lint-and-fix": "npx eslint . --ext .ts --fix"
+    "lint-and-fix": "npx eslint . --ext .ts --fix",
+    "test": "mocha -r ts-node/register 'test/**/*.ts' --timeout 10000"
   },
   "husky": {
     "hooks": {
@@ -23,17 +24,24 @@
   },
   "dependencies": {
     "@types/express": "^4.17.13",
+    "chai": "^4.3.6",
     "commander": "^9.3.0",
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "express-rate-limit": "^6.4.0",
     "husky": "^4.3.8",
+    "mocha": "^10.0.0",
+    "mockgoose": "^8.0.4",
     "mongoose": "^6.2.8",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "supertest": "^6.2.4"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.1",
     "@types/cors": "^2.8.12",
+    "@types/mocha": "^9.1.1",
     "@types/node": "^17.0.23",
+    "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
     "eslint": "^8.12.0",

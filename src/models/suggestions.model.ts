@@ -51,7 +51,7 @@ class SuggestionsModel {
     }
 
     const sortPipeline: PipelineStage = {
-      $sort: { [sortBy as string]: 1, distance: 1 },
+      $sort: { [sortBy as string]: 1 },
     };
 
     const projectPipeline = {
