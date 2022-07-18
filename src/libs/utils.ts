@@ -5,6 +5,7 @@ export function tsvToJSON(tsv: string) {
 
   for (let i = 1; i < lines.length; i++) {
     const obj: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       [k: string]: any;
     } = {};
 

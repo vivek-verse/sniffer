@@ -28,7 +28,7 @@ describe("GET /suggestions", () => {
       });
   });
 
-  it("OK, getting suggestions.. with result", (done) => {
+  it("OK, getting suggestions with result", (done) => {
     supertest(app)
       .get("/v1/suggestions?q=tor&latitude=43.70011&longitude=-79.4163&radius=5&sort=distance")
       .then((res: Response) => {
