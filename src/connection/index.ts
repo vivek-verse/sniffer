@@ -4,7 +4,7 @@ import "dotenv/config";
 mongoose.set("autoIndex", true);
 mongoose.set("debug", false);
 
-const mongoConectionString = process.env.MONGODB_URI;
+const mongoConectionString = `${process.env.MONGODB_URI}${process.env.DB_NAME}`;
 
 connect(mongoConectionString, (err) => {
   if (err) {

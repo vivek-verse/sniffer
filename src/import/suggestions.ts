@@ -10,7 +10,7 @@ const fileData = async () => {
 
 const program = new commander.Command();
 
-const mongoConnectionString = process.env.MONGODB_URI;
+const mongoConnectionString = `${process.env.MONGODB_URI}${process.env.DB_NAME}`;
 
 export const run = async () => {
   try {
