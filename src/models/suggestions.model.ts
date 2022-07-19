@@ -67,7 +67,19 @@ class SuggestionsModel {
     pipelineArray.push(sortPipeline);
     pipelineArray.push(projectPipeline);
 
-    return await Suggestions.aggregate(pipelineArray);
+    const suggestions = await Suggestions.aggregate(pipelineArray);
+
+    /*
+     * when lat, long are not passed in query params and only name is passed
+     * distance is N/A
+     */
+
+    suggestions.map((s) => {
+      if (!s.distance && s.distance !== 0) {
+        s.distance = "N/A";
+      }
+    });
+    return suggestions;
   }
 }
 
