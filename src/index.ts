@@ -3,6 +3,7 @@ import cors from "cors";
 import express from "express";
 
 import router from "./controllers";
+import errorMiddleware from "./libs/middlewares/error.middleware";
 
 function bootstrap() {
   const application = express();
@@ -18,7 +19,7 @@ function bootstrap() {
   application.use(express.json());
   application.use(express.urlencoded({ extended: true }));
   application.use("/v1", router);
-
+  application.use(errorMiddleware);
   return application;
 }
 
